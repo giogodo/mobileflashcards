@@ -119,6 +119,8 @@ const dummyEmpty = {}
 
 export default class DeckList extends Component {
 
+  // Use getDecks here
+
   renderItem = ({ item }) => {
     return <DeckListItem {...item} />
   }

@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'space-around',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    backgroundColor: '#FFFFFF'
   },
   upperContainer: {
     flex: 2,

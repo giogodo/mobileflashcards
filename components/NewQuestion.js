@@ -20,6 +20,7 @@ export default class NewQuestion extends Component {
   }
 
   handleSubmit = () => {
+    // Use addCardToDeck here
     console.warn(this.state.question, this.state.answer)
   }
 
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
     backgroundColor: '#FFFFFF',
-    margin: '10%'
+    padding: '10%'
   },
   input: {
     height: 40,

@@ -13,6 +13,7 @@ export default class NewDeck extends Component {
   }
 
   handleSubmit = () => {
+    // Use saveDeckTitle here
     console.warn(this.state.deckTitle)
   }
 
@@ -45,12 +46,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
     backgroundColor: '#FFFFFF',
-    margin: '10%'
+    padding: '10%'
   },
   label: {
     fontSize: 30,
     textAlign: 'center',
     margin: 10,
+    color: '#333333'
   },
   input: {
     height: 40,
