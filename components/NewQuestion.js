@@ -1,36 +1,46 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
-export default class NewDeck extends Component {
+export default class NewQuestion extends Component {
   state = {
-    deckTitle: ''
+    question: '',
+    answer: ''
   }
 
-  handleChange = text => {
+  handleChangeQuestion = text => {
     this.setState(() => ({
-      deckTitle: text
+      question: text
+    }))
+  }
+
+  handleChangeAnswer = text => {
+    this.setState(() => ({
+      answer: text
     }))
   }
 
   handleSubmit = () => {
-    console.warn(this.state.deckTitle)
+    console.warn(this.state.question, this.state.answer)
   }
 
   render() {
-    const { deckTitle } = this.state
+    const { question, answer } = this.state
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>
-          What is the title of your new deck?
-        </Text>
         <TextInput
-          placeholder={'Deck Title'}
+          placeholder={'Question...'}
           style={styles.input}
-          value={deckTitle}
-          onChangeText={this.handleChange} />
+          value={question}
+          onChangeText={this.handleChangeQuestion} />
+        <TextInput
+          placeholder={'Answer...'}
+          style={styles.input}
+          value={answer}
+          onChangeText={this.handleChangeAnswer} />
         <Button
           title="Submit"
           style={styles.button}
+          disabled={question === '' || answer === ''}
           onPress={this.handleSubmit}
         />
       </View>
@@ -43,13 +53,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
     margin: '10%'
-  },
-  label: {
-    fontSize: 30,
-    textAlign: 'center',
-    margin: 10,
   },
   input: {
     height: 40,
@@ -57,8 +62,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     padding: 10,
-    marginTop: 25,
-    marginBottom: 25
+    marginBottom: 55
   },
   button: {
     margin: 30

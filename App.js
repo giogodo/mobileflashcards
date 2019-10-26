@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
-import NewDeck from './screens/NewDeck'
-import NewQuestion from './screens/NewQuestion'
+import DeckList from './components/DeckList'
+import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -10,6 +11,6 @@ const instructions = Platform.select({
 
 export default class App extends Component {
   render() {
-    return (<NewQuestion />);
+    return (<DeckList />);
   }
 }
