@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Loader from './Loader';
 import FlipCard from './FlipCard';
 
@@ -126,22 +126,41 @@ export default class Quiz extends Component {
   handlePressCorrect = () => {
     const { currentQuestion, questions, score } = this.state
     questionsQ = questions.length
-    this.setState(() => ({
-      currentQuestion: currentQuestion + 1,
-      score: score + 1
-    }))
-    currentQuestion === questionsQ &&
-      console.warn('Finished');
+    currentQuestion < questionsQ ?
+      this.setState(() => ({
+        currentQuestion: currentQuestion + 1,
+        score: score + 1
+      })) :
+      this.showDialog(score + 1, questionsQ)
   }
 
   handlePressIncorrect = () => {
-    const { currentQuestion, questions } = this.state
+    const { currentQuestion, questions, score } = this.state
     questionsQ = questions.length
+    currentQuestion < questionsQ ?
+      this.setState(() => ({
+        currentQuestion: currentQuestion + 1
+      })) :
+      this.showDialog(score, questionsQ)
+  }
+
+  showDialog = (score, questionsQ) => {
+    Alert.alert(
+      'Score',
+      `You answered correctly ${score} of  ${questionsQ} questions!!!`,
+      [
+        { text: 'Restart Quiz', onPress: () => this.restartQuiz() },
+        { text: 'Back to Deck', onPress: () => console.warn('Back to Deck') }
+      ],
+      { cancelable: false }
+    )
+  }
+
+  restartQuiz = () => {
     this.setState(() => ({
-      currentQuestion: currentQuestion + 1
+      currentQuestion: 1,
+      score: 0
     }))
-    currentQuestion === questionsQ &&
-      console.warn('Finished');
   }
 
   componentDidMount() {
@@ -159,7 +178,6 @@ export default class Quiz extends Component {
     if (!questions) {
       return <Loader />
     }
-
     const questionsQ = questions.length
 
     return (
