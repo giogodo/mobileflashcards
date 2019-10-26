@@ -29,6 +29,7 @@ export default class IndividualDeck extends Component {
             onPress={this.handlePressAddCard}
           />
           <Button
+            disabled={cards === 0}
             color='black'
             title="Start Quiz"
             onPress={this.handlePressStartQuiz}
