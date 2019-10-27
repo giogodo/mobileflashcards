@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import DeckListItem from './DeckListItem'
 import EmptyState from './EmptyState'
 import Loader from './Loader';
-import { getDecks, getLastQuizDate } from '../utils/api'
+import { getDecks } from '../utils/api'
 
 export default class DeckList extends Component {
   state = {
@@ -38,7 +38,6 @@ export default class DeckList extends Component {
   }
 
   componentDidMount() {
-    getLastQuizDate().then(data => console.log(data))
     // Refreshing the data calling getData() method every time that the view get focus.
     // Make sense for the new decks and questions added in other views
     didFocusSubscription = this.props.navigation.addListener(

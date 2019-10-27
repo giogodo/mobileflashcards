@@ -7,6 +7,7 @@ import Quiz from './components/Quiz';
 import { createAppContainer } from 'react-navigation';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
+import { setLocalNotification } from './utils/helpers'
 
 const TabNav = createMaterialTopTabNavigator({
   Decks: { screen: DeckList },
@@ -43,6 +44,10 @@ const StackNav = createStackNavigator({
 const RootTab = createAppContainer(StackNav)
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return <RootTab />
   }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Loader from './Loader';
 import FlipCard from './FlipCard';
-import { getDeck, saveQuizDate } from '../utils/api'
+import { getDeck } from '../utils/api'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 export default class Quiz extends Component {
   state = {
@@ -53,8 +54,9 @@ export default class Quiz extends Component {
 
   componentDidMount() {
     const { deckId } = this.props.navigation.state.params
-    // Saving the date of the quiz started
-    saveQuizDate()
+    // Reset the notifications
+    clearLocalNotification()
+      .then(setLocalNotification)
     // Getting the questions.
     getDeck(deckId).then(deck => {
       const questions = deck.questions

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, TouchableOpacity, Animated } from 'react-native';
 
 export default class DeckListItem extends Component {
   state = {
