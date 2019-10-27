@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 
-const DECK_STORAGE_KEY = 'FlashCard:deckTTTT';
+const DECK_STORAGE_KEY = 'FlashCard:deck1';
 const LAST_QUIZ_STORAGE_KEY = 'FlashCard:lastquiz';
 
 /**

@@ -2,114 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Loader from './Loader';
 import FlipCard from './FlipCard';
-
-const dummyData = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: []
-  },
-  JavaScript1: {
-    title: 'JavaScript1',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared. A'
-      },
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared. B'
-      },
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared. C'
-      },
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared. D'
-      },
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared. E'
-      }
-    ]
-  },
-  JavaScript2: {
-    title: 'JavaScript2',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  },
-  JavaScript3: {
-    title: 'JavaScript3',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  },
-  JavaScript4: {
-    title: 'JavaScript4',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  },
-  JavaScript5: {
-    title: 'JavaScript5',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  },
-  JavaScript6: {
-    title: 'JavaScript6',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  },
-  JavaScript7: {
-    title: 'JavaScript7',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  },
-  JavaScript8: {
-    title: 'JavaScript8',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  }
-}
+import { getDeck } from '../utils/api'
 
 export default class Quiz extends Component {
   state = {
@@ -160,11 +53,13 @@ export default class Quiz extends Component {
 
   componentDidMount() {
     const { deckId } = this.props.navigation.state.params
-    // Use getDeck(deckID) here
-    const questions = dummyData[deckId].questions
-    this.setState(() => ({
-      questions
-    }))
+    // Getting the questions.
+    getDeck(deckId).then(deck => {
+      const questions = deck.questions
+      this.setState(() => ({
+        questions
+      }))
+    })
   }
 
   render() {

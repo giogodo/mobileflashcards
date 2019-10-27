@@ -12,15 +12,20 @@ export default class DeckList extends Component {
 
   getData = () => {
     getDecks().then(decks => {
-      this.setState(() => ({
-        deckListData: Object.entries(decks)
-          .map(([key, value]) => ({
-            id: key,
-            title:
-              value.title,
-            cards: value.questions.length
-          })).reverse()
-      }))
+      // Validating the result of the getDecks method.
+      decks
+        ? this.setState(() => ({
+          deckListData: Object.entries(decks)
+            .map(([key, value]) => ({
+              id: key,
+              title:
+                value.title,
+              cards: value.questions.length
+            })).reverse()
+        }))
+        : this.setState(() => ({
+          deckListData: [] // If the method send a decks object undefined show the empty state by setting the state to []
+        }))
     })
   }
 
