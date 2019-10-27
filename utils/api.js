@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
 const DECK_STORAGE_KEY = 'FlashCard:deck1';
-const LAST_QUIZ_STORAGE_KEY = 'FlashCard:lastquiz';
+const LAST_QUIZ_STORAGE_KEY = 'FlashCard:lastquiz1';
 
 /**
  * @description Return all of the decks along with their titles, questions, and answers.
@@ -45,4 +45,18 @@ export function addCardToDeck(title, card) {
       decks[title].questions = decks[title].questions.concat(card)
       return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
     })
+}
+
+/**
+ * @description Function to save the realization date of a quiz. This function have to be called every time that a Quiz component is monted.
+ */
+export function saveQuizDate() {
+  return AsyncStorage.setItem(LAST_QUIZ_STORAGE_KEY, JSON.stringify(new Date()))
+}
+
+/**
+ * @description Function to get the date of the last quiz attemp.
+ */
+export function getLastQuizDate() {
+  return AsyncStorage.getItem(LAST_QUIZ_STORAGE_KEY).then(data => JSON.parse(data))
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Loader from './Loader';
 import FlipCard from './FlipCard';
-import { getDeck } from '../utils/api'
+import { getDeck, saveQuizDate } from '../utils/api'
 
 export default class Quiz extends Component {
   state = {
@@ -53,6 +53,8 @@ export default class Quiz extends Component {
 
   componentDidMount() {
     const { deckId } = this.props.navigation.state.params
+    // Saving the date of the quiz started
+    saveQuizDate()
     // Getting the questions.
     getDeck(deckId).then(deck => {
       const questions = deck.questions
