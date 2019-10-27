@@ -28,7 +28,7 @@ export default class DeckList extends Component {
     const { navigation } = this.props
     return <DeckListItem
       {...item}
-      navigation={navigation, this.getData}
+      navigation={navigation}
     />
   }
 

@@ -7,7 +7,7 @@ export default DeckListItem = (props) => {
   const handlePress = () => {
     navigation.navigate(
       'IndividualDeck',
-      { id, navigation }
+      { id }
     )
   }
 

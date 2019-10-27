@@ -21,7 +21,11 @@ export default class NewDeck extends Component {
       this.setState(() => ({
         deckTitle: ''
       }))
-      navigation.goBack()
+      const id = deckTitle
+      navigation.navigate(
+        'IndividualDeck',
+        { id }
+      )
     })
   }
 
