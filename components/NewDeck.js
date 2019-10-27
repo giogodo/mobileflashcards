@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, KeyboardAvoidingView, TextInput, Button } from 'react-native';
+import { saveDeckTitle } from '../utils/api'
 
 export default class NewDeck extends Component {
   state = {
@@ -13,8 +14,15 @@ export default class NewDeck extends Component {
   }
 
   handleSubmit = () => {
-    // Use saveDeckTitle here
-    console.warn(this.state.deckTitle)
+    const { deckTitle } = this.state
+    const { navigation } = this.props
+    // Saving to AsyncStorage, then cleaning the state and returning to home.
+    saveDeckTitle(deckTitle).then(() => {
+      this.setState(() => ({
+        deckTitle: ''
+      }))
+      navigation.goBack()
+    })
   }
 
   render() {
