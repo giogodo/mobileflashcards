@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, KeyboardAvoidingView, TextInput, Button } from 'react-native';
+import { addCardToDeck } from '../utils/api'
 
 export default class NewQuestion extends Component {
   state = {
@@ -20,12 +21,18 @@ export default class NewQuestion extends Component {
   }
 
   handleSubmit = () => {
-    // Use addCardToDeck here
-    console.warn(this.state.question, this.state.answer)
+    const { navigation } = this.props
+    const { deckId } = navigation.state.params
+    this.setState(() => ({
+      question: '',
+      answer: ''
+    }))
+    addCardToDeck(deckId, this.state).then(() => {
+      navigation.goBack()
+    })
   }
 
   render() {
-    console.warn(this.props.navigation.state.params.deckId);
     const { question, answer } = this.state
     return (
       <KeyboardAvoidingView behavior='height' style={styles.container}>

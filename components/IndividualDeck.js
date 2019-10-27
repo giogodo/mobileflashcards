@@ -38,7 +38,7 @@ export default class IndividualDeck extends Component {
       )
   }
 
-  componentDidMount() {
+  getData = () => {
     const { id } = this.props.navigation.state.params
     getDeck(id).then(deck => {
       const title = deck.title
@@ -47,8 +47,18 @@ export default class IndividualDeck extends Component {
         title,
         cards
       }))
-
     })
+  }
+
+  componentDidMount() {
+    // Refreshing the data calling getData() method every time that the view get focus.
+    // Make sense for the new questions added in other view, for refreshing the cards quantity in this view.
+    didFocusSubscription = this.props.navigation.addListener(
+      'didFocus',
+      payload => {
+        this.getData()
+      }
+    )
   }
 
   render() {
