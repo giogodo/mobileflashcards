@@ -25,6 +25,7 @@ export default class NewQuestion extends Component {
   }
 
   render() {
+    console.warn(this.props.navigation.state.params.deckId);
     const { question, answer } = this.state
     return (
       <View style={styles.container}>

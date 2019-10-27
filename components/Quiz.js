@@ -164,7 +164,7 @@ export default class Quiz extends Component {
   }
 
   componentDidMount() {
-    const { deckId } = this.props
+    const { deckId } = this.props.navigation.state.params
     // Use getDeck(deckID) here
     const questions = dummyData[deckId].questions
     this.setState(() => ({
@@ -173,7 +173,7 @@ export default class Quiz extends Component {
   }
 
   render() {
-    const { questions, currentQuestion, score } = this.state
+    const { questions, currentQuestion } = this.state
 
     if (!questions) {
       return <Loader />

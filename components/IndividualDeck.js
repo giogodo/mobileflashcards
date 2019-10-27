@@ -122,11 +122,21 @@ export default class IndividualDeck extends Component {
   }
 
   handlePressAddCard = () => {
-    console.warn('Add card pressed');
+    const { navigation } = this.props
+    const { id } = navigation.state.params
+    navigation.navigate(
+      'NewQuestion',
+      { deckId: id }
+    )
   }
 
   handlePressStartQuiz = () => {
-    console.warn('Start Quiz pressed');
+    const { navigation } = this.props
+    const { id } = navigation.state.params
+    navigation.navigate(
+      'Quiz',
+      { deckId: id }
+    )
   }
 
   componentDidMount() {
