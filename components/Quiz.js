@@ -1,97 +1,99 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import Loader from './Loader';
-import FlipCard from './FlipCard';
-import { getDeck } from '../utils/api'
-import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import Loader from "./Loader";
+import FlipCard from "./FlipCard";
+import { getDeck } from "../utils/api";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 export default class Quiz extends Component {
   state = {
     questions: null,
     currentQuestion: 1,
     score: 0
-  }
+  };
 
   handlePressCorrect = () => {
-    const { currentQuestion, questions, score } = this.state
-    questionsQ = questions.length
-    currentQuestion < questionsQ ?
-      this.setState(() => ({
-        currentQuestion: currentQuestion + 1,
-        score: score + 1
-      })) :
-      this.showDialog(score + 1, questionsQ)
-  }
+    const { currentQuestion, questions, score } = this.state;
+    questionsQ = questions.length;
+    currentQuestion < questionsQ
+      ? this.setState(() => ({
+          currentQuestion: currentQuestion + 1,
+          score: score + 1
+        }))
+      : this.showDialog(score + 1, questionsQ);
+  };
 
   handlePressIncorrect = () => {
-    const { currentQuestion, questions, score } = this.state
-    questionsQ = questions.length
-    currentQuestion < questionsQ ?
-      this.setState(() => ({
-        currentQuestion: currentQuestion + 1
-      })) :
-      this.showDialog(score, questionsQ)
-  }
+    const { currentQuestion, questions, score } = this.state;
+    questionsQ = questions.length;
+    currentQuestion < questionsQ
+      ? this.setState(() => ({
+          currentQuestion: currentQuestion + 1
+        }))
+      : this.showDialog(score, questionsQ);
+  };
 
   showDialog = (score, questionsQ) => {
     Alert.alert(
-      'Score',
+      "Score",
       `You answered correctly ${score} of  ${questionsQ} questions!!!`,
       [
-        { text: 'Restart Quiz', onPress: () => this.restartQuiz() },
-        { text: 'Back to Deck', onPress: () => this.props.navigation.goBack() }
+        { text: "Restart Quiz", onPress: () => this.restartQuiz() },
+        { text: "Back to Deck", onPress: () => this.props.navigation.goBack() }
       ],
       { cancelable: false }
-    )
-  }
+    );
+  };
 
   restartQuiz = () => {
     this.setState(() => ({
       currentQuestion: 1,
       score: 0
-    }))
-  }
+    }));
+  };
 
   componentDidMount() {
-    const { deckId } = this.props.navigation.state.params
+    const { deckId } = this.props.navigation.state.params;
     // Reset the notifications
-    clearLocalNotification()
-      .then(setLocalNotification)
+    clearLocalNotification().then(setLocalNotification);
     // Getting the questions.
     getDeck(deckId).then(deck => {
-      const questions = deck.questions
+      const questions = deck.questions;
       this.setState(() => ({
         questions
-      }))
-    })
+      }));
+    });
   }
 
   render() {
-    const { questions, currentQuestion } = this.state
+    const { questions, currentQuestion } = this.state;
 
     if (!questions) {
-      return <Loader />
+      return <Loader />;
     }
-    const questionsQ = questions.length
+    const questionsQ = questions.length;
 
     return (
       <View style={styles.mainContainer}>
-        {currentQuestion <= questionsQ &&
-          < FlipCard data={questions[currentQuestion - 1]} />}
+        {currentQuestion <= questionsQ && (
+          <FlipCard data={questions[currentQuestion - 1]} />
+        )}
         <View style={styles.buttonsContainer}>
           <Button
-            color='green'
+            color="green"
             title="Correct"
             onPress={this.handlePressCorrect}
           />
           <Button
-            color='red'
+            color="red"
             title="Incorrect"
             onPress={this.handlePressIncorrect}
           />
         </View>
         <View style={styles.counter}>
-          <Text>{currentQuestion} / {questionsQ}</Text>
+          <Text>
+            {currentQuestion} / {questionsQ}
+          </Text>
         </View>
       </View>
     );
@@ -101,30 +103,30 @@ export default class Quiz extends Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'stretch',
-    backgroundColor: '#FFFFFF',
-    padding: '10%',
-    position: 'relative'
+    justifyContent: "space-evenly",
+    alignItems: "stretch",
+    backgroundColor: "#FFFFFF",
+    padding: "10%",
+    position: "relative"
   },
   text: {
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     margin: 10,
-    color: 'black'
+    color: "black"
   },
   leyend: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     margin: 10,
-    color: 'red'
+    color: "red"
   },
   buttonsContainer: {
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: "space-between"
   },
   counter: {
-    position: 'absolute',
+    position: "absolute",
     margin: "13%"
   }
 });

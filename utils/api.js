@@ -1,12 +1,12 @@
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from "react-native";
 
-const DECK_STORAGE_KEY = 'FlashCard:deck1';
+const DECK_STORAGE_KEY = "FlashCard:deck";
 
 /**
  * @description Return all of the decks along with their titles, questions, and answers.
  */
 export function getDecks() {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(data => JSON.parse(data))
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(data => JSON.parse(data));
 }
 
 /**
@@ -14,20 +14,25 @@ export function getDecks() {
  * @param {*} id - Id of the deck to retrieve.
  */
 export function getDeck(id) {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(data => JSON.parse(data)[id])
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(
+    data => JSON.parse(data)[id]
+  );
 }
 
 /**
  * @description Take in a single title argument and add it to the decks.
- * @param {*} title 
+ * @param {*} title
  */
 export function saveDeckTitle(title) {
-  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-    [title]: {
-      title: title,
-      questions: []
-    }
-  }))
+  return AsyncStorage.mergeItem(
+    DECK_STORAGE_KEY,
+    JSON.stringify({
+      [title]: {
+        title: title,
+        questions: []
+      }
+    })
+  );
 }
 
 /**
@@ -38,10 +43,9 @@ export function saveDeckTitle(title) {
  * @param {string} card.answer
  */
 export function addCardToDeck(title, card) {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then(data => {
-      decks = JSON.parse(data)
-      decks[title].questions = decks[title].questions.concat(card)
-      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
-    })
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(data => {
+    decks = JSON.parse(data);
+    decks[title].questions = decks[title].questions.concat(card);
+    return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
+  });
 }
