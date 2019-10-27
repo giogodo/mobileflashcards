@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Loader from './Loader';
 
 const dummyData = {
@@ -18,12 +18,7 @@ const dummyData = {
   },
   JavaScript: {
     title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
+    questions: []
   },
   JavaScript1: {
     title: 'JavaScript1',
@@ -132,11 +127,22 @@ export default class IndividualDeck extends Component {
 
   handlePressStartQuiz = () => {
     const { navigation } = this.props
+    const { cards } = this.state
     const { id } = navigation.state.params
-    navigation.navigate(
-      'Quiz',
-      { deckId: id }
-    )
+    cards === 0
+      ? Alert.alert(
+        'No cards',
+        'You cannot take a quiz because there are no cards in the deck',
+        [
+          { text: 'Ok', onPress: () => { } },
+          { text: 'Lets add cards', onPress: () => this.handlePressAddCard() }
+        ],
+        { cancelable: false }
+      )
+      : navigation.navigate(
+        'Quiz',
+        { deckId: id }
+      )
   }
 
   componentDidMount() {
@@ -174,7 +180,6 @@ export default class IndividualDeck extends Component {
             onPress={this.handlePressAddCard}
           />
           <Button
-            disabled={cards === 0}
             color='black'
             title="Start Quiz"
             onPress={this.handlePressStartQuiz}

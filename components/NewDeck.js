@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, KeyboardAvoidingView, TextInput, Button } from 'react-native';
 
 export default class NewDeck extends Component {
   state = {
@@ -20,7 +20,7 @@ export default class NewDeck extends Component {
   render() {
     const { deckTitle } = this.state
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.label}>
           What is the title of your new deck?
         </Text>
@@ -35,7 +35,7 @@ export default class NewDeck extends Component {
           disabled={deckTitle === ''}
           onPress={this.handleSubmit}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

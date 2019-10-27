@@ -32,6 +32,9 @@ export default class FlipCard extends Component {
         <Text style={styles.leyend}>
           {flipped ? 'Answer' : 'Question'}
         </Text>
+        <Text style={styles.info} >
+          Tap to show the {flipped ? 'Question' : 'Answer'}
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -41,14 +44,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     textAlign: 'center',
-    margin: 10,
+    margin: 5,
     color: 'black'
   },
   leyend: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 5,
     color: 'red'
+  },
+  info: {
+    fontSize: 10,
+    textAlign: 'center'
   },
   textContainer: {
     flex: 3,

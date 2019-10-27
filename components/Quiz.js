@@ -19,12 +19,7 @@ const dummyData = {
   },
   JavaScript: {
     title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
+    questions: []
   },
   JavaScript1: {
     title: 'JavaScript1',
@@ -150,7 +145,7 @@ export default class Quiz extends Component {
       `You answered correctly ${score} of  ${questionsQ} questions!!!`,
       [
         { text: 'Restart Quiz', onPress: () => this.restartQuiz() },
-        { text: 'Back to Deck', onPress: () => console.warn('Back to Deck') }
+        { text: 'Back to Deck', onPress: () => this.props.navigation.goBack() }
       ],
       { cancelable: false }
     )

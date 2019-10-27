@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, TextInput, Button } from 'react-native';
 
 export default class NewQuestion extends Component {
   state = {
@@ -28,7 +28,7 @@ export default class NewQuestion extends Component {
     console.warn(this.props.navigation.state.params.deckId);
     const { question, answer } = this.state
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='height' style={styles.container}>
         <TextInput
           placeholder={'Question...'}
           style={styles.input}
@@ -45,7 +45,7 @@ export default class NewQuestion extends Component {
           disabled={question === '' || answer === ''}
           onPress={this.handleSubmit}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
