@@ -18,6 +18,6 @@ Last project for the React Nanodeegree Program.
 #### `npm run android`
 
 ## Testing and development
-* Tested on Nexus One API 23 / AVD
-* Huawei Y9 / Expo
+* Tested on Nexus One API 23 / AVD - **ANDROID**
+* Huawei Y9 / Expo - **ANDROID**
 * **Not** tested on ios*
