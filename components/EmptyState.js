@@ -6,8 +6,8 @@ export default EmptyState = () => {
   return (<View
     style={styles.mainContainer}>
     <View style={styles.upperContainer}>
-      <View />
-      <View>
+      <View style={styles.subUpperContainer} />
+      <View style={styles.subUpperContainer}>
         <AntDesign name='arrowup' color='gray' size={55} />
       </View>
     </View>
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     flex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  subUpperContainer: {
+    flex: 1,
+    alignItems: 'center'
   },
   downerContainer: {
     alignItems: 'center',

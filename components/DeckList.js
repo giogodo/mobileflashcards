@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import DeckListItem from './DeckListItem'
 import EmptyState from './EmptyState'
 
@@ -122,7 +122,11 @@ export default class DeckList extends Component {
   // Use getDecks here
 
   renderItem = ({ item }) => {
-    return <DeckListItem {...item} />
+    const { navigation } = this.props
+    return <DeckListItem
+      {...item}
+      navigation={navigation}
+    />
   }
 
   render() {
@@ -136,7 +140,7 @@ export default class DeckList extends Component {
         cards: value.questions.length
       }))
     if (deckListData.length === 0) {
-      return <EmptyState/>
+      return <EmptyState />
     }
     return (
       <View style={styles.container}>

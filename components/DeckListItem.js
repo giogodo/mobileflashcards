@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export default DeckListItem = ({ id, title, cards }) => {
+export default DeckListItem = (props) => {
+  const { id, title, cards, navigation } = props
 
   const handlePress = () => {
-    console.warn(id)
+    navigation.navigate(
+      'IndividualDeck',
+      { id, navigation }
+    )
   }
 
   return (<TouchableOpacity
