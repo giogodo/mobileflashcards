@@ -18,7 +18,10 @@ const StackNav = createStackNavigator({
   Home: {
     screen: TabNav,
     navigationOptions: {
-      header: null
+      headerStyle: {
+        backgroundColor: '#2196F3',
+        height: 0
+      }
     }
   },
   IndividualDeck: {
